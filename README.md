@@ -1,2 +1,2 @@
-# Ruby-on-rails
-practica despliegue
+# Ruby
+ Practica Ruby

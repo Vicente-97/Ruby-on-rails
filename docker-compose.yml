@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  mariadb:
+     image: docker.io/bitnami/mariadb:10.6 
+    #  imagen del contenedor de mariadb para la creacion.
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      # password
+  myapp:
+    image: docker.io/bitnami/rails:7
+    # imagen bitname de rails para la creacion.
+    ports:
+      - '8001:3000'
+      # redirección de puertos, mi puerto es el 8001, mientras que la del ruby 3000.
+    environment:
+      - DATABASE_HOST=mariadb
+      # Host de la base de datos. mariadb
+      - DATABASE_NAME=my_app_development
+      # nombre de la base de datos creada.
+    volumes:
+      - './my-project:/app'
+      # ruta de volumenes
+    depends_on:
+      - mariadb
+      # dependencias de mariadb
